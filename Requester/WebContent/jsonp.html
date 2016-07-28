@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="resources/js/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+/*
+ * jsonp回调方法必须定义在外面
+ */
+	var jsonpCallback = function(data) {
+		alert('回调jsonp');
+		iterator(data);
+	}
+	
+	var iterator = function(json) {
+		for ( var key in json) {
+			alert("key: " + key + " ,value: "
+					+ json[key]);
+		}
+	}
+
+	$(function() {
+				$("a").click(function() {
+							$.ajax({
+										url : "http://test1.mango.com:8080/Receivor/register.action?callback=jsonpCallback",
+										dataType : 'jsonp',
+										type : 'post',
+										jsonp : 'jsonpCallback',
+										success : function(data) {
+											alert('jsonp请求成功: '
+													+ iterator(data));
+										},
+										error : function(XMLHttpRequest,
+												textStatus, errorThrown) {
+											alert('jsonp请求失败' + errorThrown);
+										}
+									});
+						});
+	});
+</script>
+</head>
+<body>
+	<a href="#">发送ajax请求(jsonp)</a>
+
+</body>
+</html>

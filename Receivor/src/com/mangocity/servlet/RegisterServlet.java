@@ -11,10 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import com.mangocity.bean.Result;
 
-public class LoginServlet extends HttpServlet {
+/**
+ * Servlet implementation class RegisterServlet
+ */
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public LoginServlet() {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RegisterServlet() {
 		super();
 	}
 
@@ -24,13 +30,14 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
-		System.out.println("login begin{}...");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json;charset=UTF-8");
-		Result result = new Result("10001", "用户名密码错误...");
+		System.out.println("register begin{}...");
+		response.setContentType("text/html");
+		String callback = request.getParameter("callback");
+		Result result = new Result(true);
 		PrintWriter writer = response.getWriter();
-		writer.write(JSON.toJSONString(result));
+		writer.write(callback + "(" + JSON.toJSONString(result) + ")");
 		writer.flush();
+		writer.close();
 	}
 
 }

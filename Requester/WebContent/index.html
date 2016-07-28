@@ -8,14 +8,14 @@
 	$(function() {
 		$("a").click(function() {
 			$.ajax({
-				url : "http://test1.mango.com:8080/Receivor/login",
+				url : "http://test1.mango.com:8080/Receivor/login.do",
 				contentType : 'application/json',
 				type:'post',
 				success : function(data) {
-					alert('请求成功: ' + iterator(data));
+					alert('cors请求成功: ' + iterator(data));
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert('请求失败' + errorThrown);
+					alert('cors请求失败' + errorThrown);
 				}
 			});
 			
@@ -29,7 +29,7 @@
 </script>
 </head>
 <body>
-	<a href="#">发送ajax请求</a>
+	<a href="#">发送ajax请求(setHeaders)</a>
 
 </body>
 </html>

@@ -20,9 +20,8 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
-		<url-pattern>/login</url-pattern>
+		<url-pattern>/login.do</url-pattern>
 	</servlet-mapping>
-
 	<filter>
 		<filter-name>setHeaderCrossDomain</filter-name>
 		<filter-class>com.mangocity.filter.CorsFilter</filter-class>
@@ -30,22 +29,27 @@
 			<param-name>allowOrigin</param-name>
 			<param-value>http://test.mangocity.com:8080</param-value>
 		</init-param>
-
 		<init-param>
 			<param-name>allowMethods</param-name>
 			<param-value>post</param-value>
 		</init-param>
-		
 		<init-param>
 			<param-name>allowHeaders</param-name>
 			<param-value>x-requested-with,content-type</param-value>
 		</init-param>
-		<!-- <param-name>exposeHeaders</param-name> <param-value></param-value> -->
-
 	</filter>
-
 	<filter-mapping>
 		<filter-name>setHeaderCrossDomain</filter-name>
-		<url-pattern>*</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
+	
+	<!-- 注意,url-pattern后缀名不同 *.action请求不添加Access-Control-Allow-Origin响应头信息,利用jsonp跨域-->
+	<servlet>
+		<servlet-name>RegisterServlet</servlet-name>
+		<servlet-class>com.mangocity.servlet.RegisterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegisterServlet</servlet-name>
+		<url-pattern>/register.action</url-pattern>
+	</servlet-mapping>
 </web-app>
