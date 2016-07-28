@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="resources/js/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("a").click(function() {
+			$.ajax({
+				url : "http://test1.mango.com:8080/Receivor/login",
+				contentType : 'application/json',
+				type:'post',
+				success : function(data) {
+					alert('请求成功: ' + iterator(data));
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert('请求失败' + errorThrown);
+				}
+			});
+			
+			var iterator = function(json){
+				for(var key in json){
+					alert("key: " + key + " ,value: " + json[key]);
+				}
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<a href="#">发送ajax请求</a>
+
+</body>
+</html>
